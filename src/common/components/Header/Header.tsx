@@ -19,6 +19,7 @@ import IconButton from "@mui/material/IconButton"
 import LinearProgress from "@mui/material/LinearProgress"
 import Switch from "@mui/material/Switch"
 import Toolbar from "@mui/material/Toolbar"
+import { baseApi } from "@/app/baseApi.ts"
 
 export const Header = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
@@ -41,6 +42,8 @@ export const Header = () => {
         dispatch(setIsLoggedInAC({ isLoggedIn: false }))
         localStorage.removeItem(AUTH_TOKEN)
       }
+    }).then(()=> {
+      dispatch(baseApi.util.invalidateTags(['Todolist', 'Task']))
     })
   }
 
